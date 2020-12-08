@@ -1,4 +1,5 @@
 import requests
+import re
 
 
 def request(url):
@@ -8,8 +9,14 @@ def request(url):
         pass
 
 
-target_url = "greendeahan.com"
+# links + directories
+target_url = "bukalapak.com"
 
 response = request(target_url)
-print(response.content)
+pattern = '(?<=href=").*?(?=")'
 
+# print(response.content)
+href = re.findall(pattern, response.content.decode("utf-8"))
+
+for links in href:
+    print(links)
